@@ -7,32 +7,27 @@
     <style>
         :root {
             --bg-dark: #0f172a;
-            --bg-glass: rgba(15, 23, 42, 0.8);
             --text-primary: #f1f5f9;
             --text-secondary: #94a3b8;
             --accent: #22c55e;
             --accent-secondary: #7c3aed;
-            --accent-gradient: linear-gradient(45deg, #22c55e, #7c3aed);
             --border: rgba(34, 197, 94, 0.1);
-            --card-shadow: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
         }
 
         * {
             margin: 0;
             padding: 0;
             box-sizing: border-box;
-            scroll-behavior: smooth;
         }
 
         body {
-            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, Oxygen, Ubuntu, Cantarell, sans-serif;
             background-color: var(--bg-dark);
             color: var(--text-primary);
             line-height: 1.6;
-            position: relative;
         }
 
-        /* Background grid pattern */
+        /* Simple background pattern */
         body::before {
             content: '';
             position: fixed;
@@ -47,34 +42,11 @@
             z-index: -1;
         }
 
-        /* Animated background gradient */
-        .bg-animation {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: radial-gradient(circle at 50% 50%, rgba(124, 58, 237, 0.1), transparent 60%),
-                        radial-gradient(circle at 85% 15%, rgba(34, 197, 94, 0.1), transparent 40%);
-            z-index: -2;
-            animation: bg-shift 15s ease-in-out infinite alternate;
-        }
-
-        @keyframes bg-shift {
-            0% {
-                background-position: 0% 0%;
-            }
-            100% {
-                background-position: 100% 100%;
-            }
-        }
-
         .nav {
             position: fixed;
             top: 0;
             width: 100%;
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
+            background: rgba(15, 23, 42, 0.9);
             border-bottom: 1px solid var(--border);
             z-index: 1000;
             padding: 1rem;
@@ -88,18 +60,10 @@
             align-items: center;
         }
 
-        .logo-container {
-            display: flex;
-            align-items: center;
-            gap: 1rem;
-        }
-
         .logo-text {
             font-size: 1.5rem;
             font-weight: 700;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent);
             display: flex;
             align-items: center;
         }
@@ -108,6 +72,7 @@
             content: "X";
             font-size: 1.8rem;
             margin-right: 0.25rem;
+            color: var(--accent-secondary);
         }
 
         .nav-links {
@@ -119,28 +84,11 @@
             color: var(--text-primary);
             text-decoration: none;
             font-weight: 500;
-            transition: color 0.3s, transform 0.2s;
-            position: relative;
-        }
-
-        .nav-links a::after {
-            content: '';
-            position: absolute;
-            width: 0;
-            height: 2px;
-            bottom: -4px;
-            left: 0;
-            background: var(--accent-gradient);
-            transition: width 0.3s;
+            transition: color 0.3s;
         }
 
         .nav-links a:hover {
             color: var(--accent);
-            transform: translateY(-2px);
-        }
-
-        .nav-links a:hover::after {
-            width: 100%;
         }
 
         .container {
@@ -149,53 +97,33 @@
             padding: 2rem;
         }
 
-        .glass-card {
-            background: var(--bg-glass);
-            backdrop-filter: blur(10px);
-            border-radius: 1rem;
+        .card {
+            background: rgba(15, 23, 42, 0.6);
+            border-radius: 0.5rem;
             border: 1px solid var(--border);
             padding: 2rem;
             margin-bottom: 2rem;
-            transition: all 0.3s;
-            box-shadow: var(--card-shadow);
-            overflow: hidden;
-            position: relative;
+            transition: transform 0.3s;
         }
 
-        .glass-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 4px;
-            background: var(--accent-gradient);
-            transform: scaleX(0);
-            transform-origin: left;
-            transition: transform 0.3s ease;
-        }
-
-        .glass-card:hover {
+        .card:hover {
             transform: translateY(-5px);
-        }
-
-        .glass-card:hover::before {
-            transform: scaleX(1);
         }
 
         .hero {
             text-align: center;
-            padding: 6rem 0 4rem;
-            position: relative;
+            padding: 4rem 0;
         }
 
         .hero h1 {
-            font-size: 3.5rem;
+            font-size: 3rem;
             margin-bottom: 1rem;
-            background: var(--accent-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
+            color: var(--accent);
             line-height: 1.2;
+        }
+
+        .hero span {
+            color: var(--accent-secondary);
         }
 
         .hero p {
@@ -224,8 +152,6 @@
             transition: all 0.3s;
             border: none;
             cursor: pointer;
-            gap: 0.5rem;
-            box-shadow: 0 4px 6px rgba(34, 197, 94, 0.2);
         }
 
         .btn.secondary {
@@ -236,7 +162,6 @@
 
         .btn:hover {
             transform: translateY(-2px);
-            box-shadow: 0 7px 10px rgba(34, 197, 94, 0.3);
         }
 
         .btn.secondary:hover {
@@ -254,45 +179,26 @@
         }
 
         .code-block pre {
-            font-family: 'Fira Code', monospace;
+            font-family: monospace;
             font-size: 0.9rem;
             color: var(--text-primary);
             line-height: 1.6;
         }
 
-        .code-comment {
+        .comment {
             color: #64748b;
         }
 
-        .code-keyword {
+        .keyword {
             color: #7c3aed;
         }
 
-        .code-function {
+        .function {
             color: #22c55e;
         }
 
-        .code-string {
+        .string {
             color: #fb923c;
-        }
-
-        .code-copy {
-            position: absolute;
-            top: 0.5rem;
-            right: 0.5rem;
-            background: rgba(15, 23, 42, 0.7);
-            border: none;
-            border-radius: 0.25rem;
-            color: var(--text-secondary);
-            padding: 0.25rem 0.5rem;
-            font-size: 0.8rem;
-            cursor: pointer;
-            transition: all 0.2s;
-        }
-
-        .code-copy:hover {
-            color: var(--text-primary);
-            background: rgba(15, 23, 42, 0.9);
         }
 
         .grid {
@@ -302,17 +208,11 @@
             margin-top: 2rem;
         }
 
-        .feature-card {
-            position: relative;
-            overflow: hidden;
-            border-radius: 1rem;
-            transition: all 0.3s;
-        }
-
         .feature-icon {
             width: 50px;
             height: 50px;
-            background: var(--accent-gradient);
+            background: var(--accent);
+            color: var(--bg-dark);
             border-radius: 12px;
             display: flex;
             align-items: center;
@@ -325,27 +225,12 @@
             color: var(--accent);
             margin-bottom: 1rem;
             font-size: 2rem;
-            position: relative;
-            display: inline-block;
-        }
-
-        h2::after {
-            content: '';
-            position: absolute;
-            width: 60px;
-            height: 3px;
-            background: var(--accent-gradient);
-            bottom: -8px;
-            left: 0;
         }
 
         h3 {
             color: var(--text-primary);
             margin: 1rem 0;
             font-size: 1.3rem;
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
         }
 
         p {
@@ -354,236 +239,28 @@
             font-size: 1rem;
         }
 
-        /* Terminal/Console styling */
-        .terminal-container {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 600px;
-            height: 400px;
+        /* Terminal styling */
+        .terminal {
             background: #0f172a;
             border: 1px solid #1e293b;
-            border-radius: 0.75rem;
-            font-family: 'Fira Code', monospace;
-            display: flex;
-            flex-direction: column;
-            overflow: hidden;
-            z-index: 1000;
-            resize: both;
-            min-width: 400px;
-            min-height: 300px;
-            box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.2), 0 10px 10px -5px rgba(0, 0, 0, 0.1);
-            transition: transform 0.3s ease, opacity 0.3s ease;
+            border-radius: 0.5rem;
+            padding: 1rem;
+            margin: 2rem 0;
+            font-family: monospace;
+            color: var(--accent);
         }
 
-        .terminal-container.hidden {
-            transform: translateY(calc(100% + 20px));
-            opacity: 0;
-            pointer-events: none;
+        .terminal-line {
+            margin-bottom: 0.5rem;
         }
 
-        .terminal-header {
-            padding: 12px;
-            background: #1e293b;
-            border-bottom: 1px solid #334155;
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            cursor: move;
-            user-select: none;
-        }
-
-        .terminal-title {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            color: var(--text-primary);
-            font-size: 14px;
-            font-weight: 500;
-        }
-
-        .terminal-title::before {
-            content: '';
-            width: 12px;
-            height: 12px;
-            background: var(--accent);
-            border-radius: 50%;
-        }
-
-        .terminal-controls {
-            display: flex;
-            gap: 8px;
-        }
-
-        .terminal-control {
-            width: 12px;
-            height: 12px;
-            border-radius: 50%;
-            cursor: pointer;
-        }
-
-        .terminal-control.close {
-            background: #ef4444;
-        }
-
-        .terminal-control.minimize {
-            background: #f59e0b;
-        }
-
-        .terminal-control.expand {
-            background: #10b981;
-        }
-
-        .terminal-messages {
-            flex: 1;
-            overflow-y: auto;
-            padding: 16px;
-            background: #0f172a;
-            font-size: 14px;
-            line-height: 1.5;
-        }
-
-        .message {
-            margin-bottom: 8px;
-            font-family: 'Fira Code', monospace;
-            white-space: pre-wrap;
-        }
-
-        .message.system {
-            color: #64748b;
-        }
-
-        .message.user {
-            color: #22c55e;
-        }
-
-        .message.user::before {
+        .terminal-prompt::before {
             content: "$ ";
             color: #64748b;
         }
 
-        .message.bot {
-            color: #7c3aed;
-        }
-
-        .message.error {
-            color: #ef4444;
-        }
-
-        .terminal-input {
-            padding: 12px 16px;
-            background: #1e293b;
-            border-top: 1px solid #334155;
-            display: flex;
-            align-items: center;
-        }
-
-        .terminal-input::before {
-            content: "$ ";
-            color: #64748b;
-            font-family: 'Fira Code', monospace;
-            margin-right: 4px;
-        }
-
-        .terminal-input input {
-            flex: 1;
-            background: transparent;
-            border: none;
-            color: #22c55e;
-            font-family: 'Fira Code', monospace;
-            font-size: 14px;
-            outline: none;
-        }
-
-        .terminal-input input::placeholder {
-            color: #475569;
-        }
-
-        .terminal-toggle {
-            position: fixed;
-            bottom: 20px;
-            right: 20px;
-            width: 50px;
-            height: 50px;
-            background: var(--accent);
-            border: none;
-            border-radius: 50%;
-            color: var(--bg-dark);
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            z-index: 1001;
-            font-size: 1.5rem;
-            box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3);
-            transition: all 0.3s;
-        }
-
-        .terminal-toggle:hover {
-            transform: translateY(-2px) rotate(15deg);
-            box-shadow: 0 15px 20px -3px rgba(34, 197, 94, 0.4);
-        }
-
-        .project-link {
-            text-decoration: none;
-            color: inherit;
-            display: block;
-        }
-
-        .project-link:hover .glass-card {
-            transform: translateY(-5px);
-        }
-
-        .scroll-top {
-            position: fixed;
-            bottom: 20px;
-            left: 20px;
-            width: 40px;
-            height: 40px;
-            background: var(--accent);
-            color: var(--bg-dark);
-            border: none;
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            transition: all 0.3s;
-            z-index: 999;
-            opacity: 0;
-            visibility: hidden;
-            box-shadow: 0 10px 15px -3px rgba(34, 197, 94, 0.3);
-        }
-
-        .scroll-top.visible {
-            opacity: 1;
-            visibility: visible;
-        }
-
-        .scroll-top:hover {
-            transform: translateY(-2px);
-        }
-
-        .typing-animation::after {
-            content: '|';
-            animation: blink 1s infinite;
-        }
-
-        @keyframes blink {
-            0%, 100% { opacity: 1; }
-            50% { opacity: 0; }
-        }
-
-        /* Animations for sections */
-        .fade-in {
-            opacity: 0;
-            transform: translateY(20px);
-            transition: opacity 0.6s ease, transform 0.6s ease;
-        }
-
-        .fade-in.visible {
-            opacity: 1;
-            transform: translateY(0);
+        .terminal-output {
+            color: var(--text-secondary);
         }
 
         /* Mobile responsiveness */
@@ -609,58 +286,25 @@
                 padding: 1rem;
             }
 
-            .terminal-container {
-                width: 90%;
-                height: 300px;
-                right: 5%;
-            }
-
             .btn-group {
                 flex-direction: column;
                 align-items: center;
             }
         }
 
-        /* Demo section animations */
-        .demo-animation {
-            position: relative;
-            height: 300px;
-            overflow: hidden;
-            border-radius: 0.75rem;
-            margin: 2rem 0;
-            background: #0f172a;
-            border: 1px solid #1e293b;
-        }
-
-        .demo-code {
-            font-family: 'Fira Code', monospace;
-            position: absolute;
-            top: 50%;
-            left: 50%;
-            transform: translate(-50%, -50%);
-            color: var(--text-primary);
-            font-size: 1rem;
-            line-height: 1.6;
-            width: 80%;
-            opacity: 0;
-            animation: fadeInOut 10s infinite;
-        }
-
-        @keyframes fadeInOut {
-            0%, 100% { opacity: 0; transform: translate(-50%, -40%); }
-            20%, 80% { opacity: 1; transform: translate(-50%, -50%); }
+        footer {
+            text-align: center;
+            padding: 2rem;
+            margin-top: 2rem;
+            border-top: 1px solid var(--border);
+            color: var(--text-secondary);
         }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=Fira+Code:wght@400;500&display=swap" rel="stylesheet">
 </head>
 <body>
-    <div class="bg-animation"></div>
-    
     <nav class="nav">
         <div class="nav-content">
-            <div class="logo-container">
-                <div class="logo-text">linx-AI</div>
-            </div>
+            <div class="logo-text">linx-AI</div>
             <div class="nav-links">
                 <a href="#about">About</a>
                 <a href="#features">Features</a>
@@ -669,13 +313,12 @@
                 <a href="#docs">Docs</a>
                 <a href="https://github.com/xlinx-ai" target="_blank">GitHub</a>
             </div>
-            <button class="menu-toggle" style="display: none;">☰</button>
         </div>
     </nav>
 
     <div class="container">
-        <section class="hero fade-in">
-            <h1>Xlinx-AI</h1>
+        <section class="hero card">
+            <h1><span>X</span>linx-AI</h1>
             <p>Accelerate development with intelligent coding agents and seamless API integration</p>
             <div class="btn-group">
                 <a href="#api" class="btn">Get Started</a>
@@ -683,21 +326,21 @@
             </div>
         </section>
 
-        <section id="about" class="glass-card fade-in">
+        <section id="about" class="card">
             <h2>About Xlinx-AI 🚀</h2>
             <p>Xlinx-AI is a cutting-edge platform that provides fast coding agent APIs and a powerful web UI for seamless integration. Our technology enables developers to build intelligent applications with minimal effort through our agent-based approach.</p>
             <div class="grid">
-                <div class="glass-card feature-card">
+                <div class="card">
                     <div class="feature-icon">⚡</div>
                     <h3>Lightning Fast</h3>
                     <p>Achieve incredible performance with our optimized agent architecture, delivering results in milliseconds.</p>
                 </div>
-                <div class="glass-card feature-card">
+                <div class="card">
                     <div class="feature-icon">🔌</div>
                     <h3>Seamless Integration</h3>
                     <p>Connect to your existing systems with our flexible API and comprehensive SDK support.</p>
                 </div>
-                <div class="glass-card feature-card">
+                <div class="card">
                     <div class="feature-icon">🧠</div>
                     <h3>Intelligent Agents</h3>
                     <p>Leverage the power of advanced AI agents to automate complex coding tasks and workflows.</p>
@@ -705,125 +348,111 @@
             </div>
         </section>
 
-        <section id="features" class="glass-card fade-in">
+        <section id="features" class="card">
             <h2>Core Features 🛠️</h2>
             <p>Xlinx-AI combines powerful capabilities to transform your development workflow.</p>
             <div class="grid">
-                <div class="glass-card feature-card">
+                <div class="card">
                     <h3>Code Generation 💻</h3>
                     <p>Generate high-quality code in multiple languages with contextual understanding and best practices.</p>
                 </div>
-                <div class="glass-card feature-card">
+                <div class="card">
                     <h3>API Automation 🔄</h3>
                     <p>Create, test, and deploy APIs automatically with intelligent agent assistance.</p>
                 </div>
-                <div class="glass-card feature-card">
+                <div class="card">
                     <h3>Real-time Collaboration 👥</h3>
                     <p>Work together seamlessly with team members through our collaborative development environment.</p>
-                </div>
-                <div class="glass-card feature-card">
-                    <h3>Continuous Learning 📈</h3>
-                    <p>Agents that improve over time by learning from your codebase and feedback.</p>
-                </div>
-                <div class="glass-card feature-card">
-                    <h3>Multi-framework Support 🧩</h3>
-                    <p>Compatible with all major programming frameworks and languages.</p>
-                </div>
-                <div class="glass-card feature-card">
-                    <h3>Smart Debugging 🔍</h3>
-                    <p>Identify and fix issues automatically with intelligent error analysis.</p>
                 </div>
             </div>
         </section>
 
-        <section id="api" class="glass-card fade-in">
+        <section id="api" class="card">
             <h2>Xlink-AI API 🔌</h2>
             <p>Our RESTful API gives you programmatic access to the full power of Xlinx-AI's agent capabilities.</p>
             
             <div class="code-block">
-                <button class="code-copy">Copy</button>
-                <pre><span class="code-comment">// Initialize the Xlinx-AI API client</span>
-<span class="code-keyword">const</span> <span class="code-function">xlinxAI</span> = <span class="code-keyword">new</span> <span class="code-function">XlinxAI</span>({
-  apiKey: <span class="code-string">'your-api-key'</span>,
-  version: <span class="code-string">'v1'</span>
+                <pre><span class="comment">// Initialize the Xlinx-AI API client</span>
+<span class="keyword">const</span> <span class="function">xlinxAI</span> = <span class="keyword">new</span> <span class="function">XlinxAI</span>({
+  apiKey: <span class="string">'your-api-key'</span>,
+  version: <span class="string">'v1'</span>
 });
 
-<span class="code-comment">// Generate code with an agent</span>
-<span class="code-keyword">const</span> response = <span class="code-keyword">await</span> xlinxAI.agents.<span class="code-function">createCode</span>({
-  language: <span class="code-string">'javascript'</span>,
-  task: <span class="code-string">'Create a React component that fetches and displays user data'</span>,
+<span class="comment">// Generate code with an agent</span>
+<span class="keyword">const</span> response = <span class="keyword">await</span> xlinxAI.agents.<span class="function">createCode</span>({
+  language: <span class="string">'javascript'</span>,
+  task: <span class="string">'Create a React component that fetches and displays user data'</span>,
   context: {
-    frameworks: [<span class="code-string">'react'</span>, <span class="code-string">'axios'</span>],
-    bestPractices: <span class="code-keyword">true</span>
+    frameworks: [<span class="string">'react'</span>, <span class="string">'axios'</span>],
+    bestPractices: <span class="keyword">true</span>
   }
 });</pre>
             </div>
 
             <div class="grid">
-                <div class="glass-card feature-card">
+                <div class="card">
                     <h3>RESTful Endpoints</h3>
                     <p>Access all agent capabilities through our comprehensive set of REST endpoints.</p>
                 </div>
-                <div class="glass-card feature-card">
+                <div class="card">
                     <h3>SDK Support</h3>
                     <p>Official client libraries for JavaScript, Python, Java, Go, and more.</p>
                 </div>
-                <div class="glass-card feature-card">
+                <div class="card">
                     <h3>Real-time Events</h3>
                     <p>WebSocket support for real-time updates and agent interactions.</p>
                 </div>
             </div>
         </section>
 
-        <section id="web-ui" class="glass-card fade-in">
+        <section id="web-ui" class="card">
             <h2>Web UI Integration 🖥️</h2>
             <p>Our intuitive web interface connects directly to the Xlink-AI API, providing a seamless development experience.</p>
             
-            <div class="demo-animation">
-                <div class="demo-code typing-animation">
-                    > Generating React data fetching component...
-                    > Analyzing requirements...
-                    > Incorporating best practices...
-                    > Building component structure...
-                    > Optimizing performance...
-                    > Code generation complete!
-                </div>
+            <div class="terminal">
+                <div class="terminal-line terminal-prompt">xlinx generate react-component user-profile</div>
+                <div class="terminal-line terminal-output">Generating React component for user profile...</div>
+                <div class="terminal-line terminal-output">Analyzing requirements...</div>
+                <div class="terminal-line terminal-output">Incorporating best practices...</div>
+                <div class="terminal-line terminal-output">Building component structure...</div>
+                <div class="terminal-line terminal-output">Optimizing performance...</div>
+                <div class="terminal-line terminal-output">Code generation complete!</div>
             </div>
 
             <div class="grid">
-                <div class="glass-card feature-card">
+                <div class="card">
                     <h3>Interactive Console</h3>
                     <p>Command line interface for direct agent interaction and code generation.</p>
                 </div>
-                <div class="glass-card feature-card">
+                <div class="card">
                     <h3>Visual Workflows</h3>
                     <p>Drag-and-drop interface for creating complex agent automation pipelines.</p>
                 </div>
-                <div class="glass-card feature-card">
+                <div class="card">
                     <h3>Real-time Preview</h3>
                     <p>See your generated code and applications in action immediately.</p>
                 </div>
             </div>
         </section>
 
-        <section id="docs" class="glass-card fade-in">
+        <section id="docs" class="card">
             <h2>Documentation 📚</h2>
             <p>Comprehensive resources to help you get the most out of Xlinx-AI.</p>
             <div class="grid">
-                <a href="#" class="project-link">
-                    <div class="glass-card feature-card">
+                <a href="#" style="text-decoration: none; color: inherit;">
+                    <div class="card">
                         <h3>Quick Start Guide</h3>
                         <p>Get up and running with Xlinx-AI in minutes with our step-by-step guide.</p>
                     </div>
                 </a>
-                <a href="#" class="project-link">
-                    <div class="glass-card feature-card">
+                <a href="#" style="text-decoration: none; color: inherit;">
+                    <div class="card">
                         <h3>API Reference</h3>
                         <p>Detailed documentation of all endpoints, parameters, and response formats.</p>
                     </div>
                 </a>
-                <a href="#" class="project-link">
-                    <div class="glass-card feature-card">
+                <a href="#" style="text-decoration: none; color: inherit;">
+                    <div class="card">
                         <h3>SDK Examples</h3>
                         <p>Sample code and projects showcasing how to leverage Xlinx-AI in different scenarios.</p>
                     </div>
@@ -832,29 +461,12 @@
         </section>
     </div>
 
-    <button class="scroll-top">↑</button>
-
-    <!-- Interactive Terminal Interface -->
-    <button class="terminal-toggle" onclick="toggleTerminal()">></button>
-    <div class="terminal-container hidden" id="terminalContainer">
-        <div class="terminal-header">
-            <div class="terminal-title">Xlinx-AI Terminal</div>
-            <div class="terminal-controls">
-                <div class="terminal-control minimize" onclick="toggleTerminal()"></div>
-                <div class="terminal-control expand"></div>
-                <div class="terminal-control close" onclick="toggleTerminal()"></div>
-            </div>
-        </div>
-        <div class="terminal-messages" id="terminalMessages">
-            <div class="message system">Xlinx-AI Terminal v1.0.0 - Type 'help' for available commands</div>
-        </div>
-        <div class="terminal-input">
-            <input type="text" id="userInput" placeholder="Type a command..." onkeypress="handleKeyPress(event)">
-        </div>
-    </div>
+    <footer>
+        <p>&copy; 2025 Xlinx-AI. All rights reserved.</p>
+    </footer>
 
     <script>
-        // Add smooth scrolling for anchor links
+        // Simple scroll to anchor links
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
@@ -863,412 +475,6 @@
                 });
             });
         });
-
-        // Add scroll to top button functionality
-        const scrollTopBtn = document.querySelector('.scroll-top');
-        window.addEventListener('scroll', () => {
-            if (window.pageYOffset > 300) {
-                scrollTopBtn.classList.add('visible');
-            } else {
-                scrollTopBtn.classList.remove('visible');
-            }
-        });
-
-        scrollTopBtn.addEventListener('click', () => {
-            window.scrollTo({
-                top: 0,
-                behavior: 'smooth'
-            });
-        });
-
-        // Copy code blocks
-        document.querySelectorAll('.code-copy').forEach(button => {
-            button.addEventListener('click', () => {
-                const codeBlock = button.nextElementSibling;
-                const textToCopy = codeBlock.textContent;
-                
-                navigator.clipboard.writeText(textToCopy).then(() => {
-                    const originalText = button.textContent;
-                    button.textContent = 'Copied!';
-                    setTimeout(() => {
-                        button.textContent = originalText;
-                    }, 2000);
-                }).catch(err => {
-                    console.error('Failed to copy: ', err);
-                });
-            });
-        });
-
-        // Interactive typing animation for code examples
-        const typeWriter = (element, text, speed = 50, startDelay = 0) => {
-            return new Promise(resolve => {
-                setTimeout(() => {
-                    let i = 0;
-                    element.innerHTML = '';
-                    element.classList.add('typing-animation');
-                    
-                    function type() {
-                        if (i < text.length) {
-                            element.innerHTML += text.charAt(i);
-                            i++;
-                            setTimeout(type, speed);
-                        } else {
-                            element.classList.remove('typing-animation');
-                            resolve();
-                        }
-                    }
-                    
-                    type();
-                }, startDelay);
-            });
-        };
-        
-        // Apply typing effect to demo code blocks on scroll
-        const applyTypingEffect = () => {
-            const demoCode = document.querySelector('.demo-code');
-            if (demoCode && isElementInViewport(demoCode)) {
-                demoCode.classList.remove('typing-animation');
-                const text = demoCode.textContent;
-                typeWriter(demoCode, text, 30);
-            }
-        };
-        
-        function isElementInViewport(el) {
-            const rect = el.getBoundingClientRect();
-            return (
-                rect.top >= 0 &&
-                rect.left >= 0 &&
-                rect.bottom <= (window.innerHeight || document.documentElement.clientHeight) &&
-                rect.right <= (window.innerWidth || document.documentElement.clientWidth)
-            );
-        }
-        
-        // Check if demo code is in viewport on scroll
-        window.addEventListener('scroll', applyTypingEffect);
-        
-        // Fade in animations on scroll
-        const fadeElements = document.querySelectorAll('.fade-in');
-        const observerOptions = {
-            root: null,
-            rootMargin: '0px',
-            threshold: 0.1
-        };
-
-        const observer = new IntersectionObserver((entries, observer) => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('visible');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, observerOptions);
-
-        fadeElements.forEach(element => {
-            observer.observe(element);
-        });
-        
-        // Terminal Functions
-        let isDragging = false;
-        let currentX;
-        let currentY;
-        let initialX;
-        let initialY;
-        let xOffset = 0;
-        let yOffset = 0;
-
-        function toggleTerminal() {
-            const terminalContainer = document.getElementById('terminalContainer');
-            terminalContainer.classList.toggle('hidden');
-            
-            // If opening the terminal, focus the input
-            if (!terminalContainer.classList.contains('hidden')) {
-                document.getElementById('userInput').focus();
-            }
-        }
-
-        function appendMessage(message, type = 'system') {
-            const messagesDiv = document.getElementById('terminalMessages');
-            const messageDiv = document.createElement('div');
-            messageDiv.className = `message ${type}`;
-            messageDiv.textContent = message;
-            messagesDiv.appendChild(messageDiv);
-            messagesDiv.scrollTop = messagesDiv.scrollHeight;
-        }
-
-        function handleCommand(commandText) {
-            if (!commandText.trim()) return;
-            
-            // Parse command and arguments
-            const parts = commandText.split(' ');
-            const command = parts[0].toLowerCase();
-            const args = parts.slice(1);
-            
-            // Handle the command
-            if (TERMINAL_COMMANDS[command]) {
-                const result = TERMINAL_COMMANDS[command].handler(args);
-                if (result) {
-                    appendMessage(result, 'bot');
-                }
-            } else {
-                appendMessage(`Command not found: ${command}. Type 'help' for available commands.`, 'error');
-            }
-        }
-
-        function handleKeyPress(event) {
-            if (event.key === 'Enter') {
-                const input = document.getElementById('userInput');
-                const command = input.value.trim();
-                if (command) {
-                    appendMessage(command, 'user');
-                    handleCommand(command);
-                    input.value = '';
-                }
-            }
-        }
-
-        // Make terminal window draggable
-        const terminalHeader = document.querySelector('.terminal-header');
-        const terminalContainer = document.getElementById('terminalContainer');
-
-        terminalHeader.addEventListener('mousedown', dragStart);
-        document.addEventListener('mousemove', drag);
-        document.addEventListener('mouseup', dragEnd);
-
-        function dragStart(e) {
-            if (e.target.closest('.terminal-controls')) return;
-            
-            initialX = e.clientX - xOffset;
-            initialY = e.clientY - yOffset;
-            
-            isDragging = true;
-        }
-
-        function drag(e) {
-            if (isDragging) {
-                e.preventDefault();
-                
-                currentX = e.clientX - initialX;
-                currentY = e.clientY - initialY;
-                
-                xOffset = currentX;
-                yOffset = currentY;
-                
-                setTranslate(currentX, currentY, terminalContainer);
-            }
-        }
-
-        function dragEnd() {
-            initialX = currentX;
-            initialY = currentY;
-            isDragging = false;
-        }
-
-        function setTranslate(xPos, yPos, el) {
-            el.style.transform = `translate(${xPos}px, ${yPos}px)`;
-        }
-        
-        // Initialize the page
-        document.addEventListener('DOMContentLoaded', () => {
-            // Start animations
-            fadeElements.forEach(element => {
-                setTimeout(() => {
-                    element.classList.add('visible');
-                }, 300);
-            });
-            
-            // Apply typing effect to demo code
-            setTimeout(applyTypingEffect, 1000);
-            
-            // Initialize code copy buttons
-            document.querySelectorAll('.code-copy').forEach(button => {
-                button.addEventListener('click', function() {
-                    const code = this.nextElementSibling.textContent;
-                    navigator.clipboard.writeText(code);
-                    
-                    // Show copied feedback
-                    const originalText = this.textContent;
-                    this.textContent = 'Copied!';
-                    setTimeout(() => {
-                        this.textContent = originalText;
-                    }, 2000);
-                });
-            });
-        });
-
-        // Terminal Functions
-        const TERMINAL_COMMANDS = {
-            'help': {
-                description: 'Show available commands',
-                handler: () => `Available commands:
-  help              Show this help message
-  about             Learn about Xlinx-AI
-  features          List Xlinx-AI features
-  api               Get API information
-  demo              Run a quick demo
-  generate [task]   Generate code for a specific task
-  docs              Get documentation links
-  github            Get GitHub repository link
-  clear             Clear the terminal
-  exit              Close the terminal`
-            },
-            'about': {
-                description: 'Learn about Xlinx-AI',
-                handler: () => `Xlinx-AI is a cutting-edge platform that provides fast coding agent APIs 
-and a powerful web UI for seamless integration. Our technology enables 
-developers to build intelligent applications with minimal effort through 
-our agent-based approach.
-
-Core strengths:
-- Lightning fast code generation and API automation
-- Intelligent agent assistance for complex tasks
-- Seamless integration with existing development workflows
-- Multi-language and framework support`
-            },
-            'features': {
-                description: 'List Xlinx-AI features',
-                handler: () => `Core Xlinx-AI Features:
-- Code Generation: Create high-quality code in multiple languages
-- API Automation: Build and test APIs with minimal configuration
-- Real-time Collaboration: Work together with your team seamlessly
-- Continuous Learning: Agents that improve with usage
-- Multi-framework Support: Works with all major technologies
-- Smart Debugging: Identify and resolve issues automatically`
-            },
-            'api': {
-                description: 'Get API information',
-                handler: () => `Xlinx-AI API v1.0:
-
-Base URL: https://api.xlinx.ai/v1
-
-Key endpoints:
-- /agents/create-code - Generate code based on specifications
-- /agents/review-code - Get feedback and improvements for existing code
-- /agents/fix-bugs - Automatically detect and fix issues
-- /agents/optimize - Improve performance of existing code
-- /agents/document - Generate documentation for your codebase
-
-Authentication:
-All requests require an API key in the X-API-Key header. 
-Get your key at https://xlinx.ai/dashboard`
-            },
-            'demo': {
-                description: 'Run a quick demo',
-                handler: () => {
-                    let output = 'Running Xlinx-AI demo...\n';
-                    
-                    // Schedule multiple messages for a simulation effect
-                    setTimeout(() => appendMessage('Initializing code generation agent...', 'bot'), 300);
-                    setTimeout(() => appendMessage('Agent ready! Generating a React component...', 'bot'), 1000);
-                    setTimeout(() => appendMessage('Analyzing requirements and context...', 'bot'), 2000);
-                    setTimeout(() => appendMessage('Applying best practices and optimizations...', 'bot'), 3000);
-                    setTimeout(() => {
-                        appendMessage(`Demo complete! Here's the generated component:`, 'bot');
-                        appendMessage(`
-import React, { useState, useEffect } from 'react';
-import axios from 'axios';
-
-const UserProfile = ({ userId }) => {
-  const [user, setUser] = useState(null);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-
-  useEffect(() => {
-    const fetchUser = async () => {
-      try {
-        setLoading(true);
-        const response = await axios.get(\`https://api.example.com/users/\${userId}\`);
-        setUser(response.data);
-      } catch (err) {
-        setError('Failed to load user data');
-        console.error(err);
-      } finally {
-        setLoading(false);
-      }
-    };
-
-    fetchUser();
-  }, [userId]);
-
-  if (loading) return <div className="loading-spinner">Loading...</div>;
-  if (error) return <div className="error-message">{error}</div>;
-  
-  return (
-    <div className="user-profile">
-      <h2>{user.name}</h2>
-      <p className="user-email">{user.email}</p>
-      <div className="user-stats">
-        <div className="stat">
-          <span className="stat-value">{user.posts}</span>
-          <span className="stat-label">Posts</span>
-        </div>
-        <div className="stat">
-          <span className="stat-value">{user.followers}</span>
-          <span className="stat-label">Followers</span>
-        </div>
-      </div>
-      <button className="primary-button">Edit Profile</button>
-    </div>
-  );
-};
-
-export default UserProfile;`, 'bot');
-                    }, 4500);
-                    
-                    return output;
-                }
-            },
-            'generate': {
-                description: 'Generate code for a specific task',
-                handler: (args) => {
-                    if (!args || args.length === 0) {
-                        return 'Please specify a task. Example: generate "Create a login form with validation"';
-                    }
-                    
-                    const task = args.join(' ');
-                    appendMessage(`Generating code for: ${task}`, 'bot');
-                    setTimeout(() => appendMessage('Analyzing requirements...', 'bot'), 500);
-                    setTimeout(() => appendMessage('Generating solution...', 'bot'), 1500);
-                    setTimeout(() => {
-                        appendMessage('Code generation complete! Would you like to see the result?', 'bot');
-                    }, 2500);
-                    
-                    return `Initiating code generation for task: "${task}"...`;
-                }
-            },
-            'docs': {
-                description: 'Get documentation links',
-                handler: () => `Xlinx-AI Documentation:
-
-- Getting Started: https://docs.xlinx.ai/getting-started
-- API Reference: https://docs.xlinx.ai/api
-- SDK Examples: https://docs.xlinx.ai/examples
-- Tutorials: https://docs.xlinx.ai/tutorials
-- Best Practices: https://docs.xlinx.ai/best-practices`
-            },
-            'github': {
-                description: 'Get GitHub repository link',
-                handler: () => `Xlinx-AI on GitHub: https://github.com/xlinx-ai
-
-Main repositories:
-- xlinx-ai/core: Core agent framework
-- xlinx-ai/api: API server and client SDKs
-- xlinx-ai/web-ui: Web interface components
-- xlinx-ai/docs: Documentation and examples
-- xlinx-ai/demos: Demo applications and templates`
-            },
-            'clear': {
-                description: 'Clear the terminal',
-                handler: () => {
-                    document.getElementById('terminalMessages').innerHTML = '<div class="message system">Xlinx-AI Terminal v1.0.0 - Type \'help\' for available commands</div>';
-                    return null;
-                }
-            },
-            'exit': {
-                description: 'Close the terminal',
-                handler: () => {
-                    toggleTerminal();
-                    return null;
-                }
-            }
-        };
-                
+    </script>
+</body>
+</html>     
